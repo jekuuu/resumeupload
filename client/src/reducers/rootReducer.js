@@ -1,10 +1,13 @@
 import {
+  COVER_LETTER,
+  CV,
   EMAIL,
   FIRST_NAME,
   GIT_PROFILE,
   LAST_NAME,
   LIVE_IN_US,
   PHONE_NUMBER,
+  RESET,
 } from "../AppConstants";
 
 const initialState = {
@@ -32,6 +35,12 @@ export function rootReducer(state = initialState, action) {
       return { ...state, live_in_us: action.payload };
     case GIT_PROFILE:
       return { ...state, git_profile: action.payload };
+    case CV:
+      return { ...state, cv: action.payload };
+    case COVER_LETTER:
+      return { ...state, cover_letter: action.payload };
+    case RESET:
+      return { ...state, ...initialState };
 
     default:
       return state;

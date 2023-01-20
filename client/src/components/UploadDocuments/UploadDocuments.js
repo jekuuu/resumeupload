@@ -1,8 +1,24 @@
+import React, { useEffect } from "react";
 import { Button, Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { COVER_LETTER, CV } from "../../AppConstants";
 
 const UploadDocuments = () => {
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => state);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    dispatch({ type: name, payload: value });
+  };
+
   return (
     <Container maxWidth="sm" sx={{ mt: 5 }}>
       <Grid container spacing={2}>
@@ -13,6 +29,8 @@ const UploadDocuments = () => {
               type="file"
               accept="application/pdf,application/msword"
               hidden
+              name={CV}
+              onChange={handleChange}
             />
           </Button>
         </Grid>
@@ -23,6 +41,8 @@ const UploadDocuments = () => {
               type="file"
               accept="application/pdf,application/msword"
               hidden
+              name={COVER_LETTER}
+              onChange={handleChange}
             />
           </Button>
         </Grid>

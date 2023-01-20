@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -9,16 +9,19 @@ import Typography from "@mui/material/Typography";
 
 import BasicDetails from "../BasicDetails/BasicDetails";
 import UploadDocuments from "../UploadDocuments/UploadDocuments";
+import { RESET } from "../../AppConstants";
 
 const steps = ["Basic Details", "Upload Documents"];
 
 export default function FormComponent() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const dispatch = useDispatch();
 
   const data = useSelector((state) => state);
 
   const handleSubmit = () => {
     console.log(data);
+    dispatch({ type: RESET });
   };
 
   const handleNext = () => {
