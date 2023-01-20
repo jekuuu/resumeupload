@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
@@ -11,12 +11,14 @@ import axios from "axios";
 import BasicDetails from "../BasicDetails/BasicDetails";
 import UploadDocuments from "../UploadDocuments/UploadDocuments";
 import { RESET } from "../../AppConstants";
+import SnackbarComponent from "../Snackbar/SnackbarComponent";
 
 const steps = ["Basic Details", "Upload Documents"];
 
 export default function FormComponent() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const data = useSelector((state) => state);
 
@@ -25,11 +27,13 @@ export default function FormComponent() {
       .post("http://localhost:5000/post", JSON.stringify(data))
       .then(function (response) {
         console.log(response);
+        setIsSuccess(true);
       })
       .catch(function (error) {
         console.log(error);
       });
     dispatch({ type: RESET });
+    setIsSuccess(false);
   };
 
   const handleNext = () => {
@@ -49,6 +53,7 @@ export default function FormComponent() {
 
   return (
     <Box sx={{ m: "auto", width: "50%" }}>
+      {isSuccess && <SnackbarComponent isOpen />}
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
