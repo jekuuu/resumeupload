@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 
-import FormComponent from "./components/Form/FormComponent";
+import FormComponent from "./components/Stepper/StepperComponent";
 import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {

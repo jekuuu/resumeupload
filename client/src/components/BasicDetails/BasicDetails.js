@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Checkbox,
   Container,
@@ -6,9 +7,36 @@ import {
   Grid,
   TextField,
 } from "@mui/material";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ABOUT_YOU,
+  EMAIL,
+  FIRST_NAME,
+  GIT_PROFILE,
+  LAST_NAME,
+  LIVE_IN_US,
+  PHONE_NUMBER,
+} from "../../AppConstants";
 
 const BasicDetails = () => {
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => state);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    dispatch({ type: name, payload: value });
+  };
+
+  const handleCheckbox = (e) => {
+    let { name, checked } = e.target;
+    dispatch({ type: name, payload: checked });
+  };
+
   return (
     <Container maxWidth="sm" sx={{ mt: 5 }}>
       <Grid container spacing={2}>
@@ -19,7 +47,9 @@ const BasicDetails = () => {
             id="standard-basic"
             label="First Name"
             variant="standard"
-            name="first_name"
+            name={FIRST_NAME}
+            value={data[FIRST_NAME]}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -28,7 +58,9 @@ const BasicDetails = () => {
             id="standard-basic"
             label="Last Name"
             variant="standard"
-            name="last_name"
+            name={LAST_NAME}
+            onChange={handleChange}
+            value={data[LAST_NAME]}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -38,7 +70,9 @@ const BasicDetails = () => {
             id="standard-basic"
             label="Email"
             variant="standard"
-            name="email"
+            name={EMAIL}
+            onChange={handleChange}
+            value={data[EMAIL]}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -47,13 +81,22 @@ const BasicDetails = () => {
             label="Phone Number"
             variant="standard"
             sx={{ width: "100%" }}
-            name="phone_number"
+            name={PHONE_NUMBER}
+            onChange={handleChange}
+            value={data[PHONE_NUMBER]}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <FormGroup>
             <FormControlLabel
-              control={<Checkbox defaultChecked name="live_in_us" required />}
+              control={
+                <Checkbox
+                  value={data[LIVE_IN_US]}
+                  name={LIVE_IN_US}
+                  required
+                  onChange={handleCheckbox}
+                />
+              }
               label="Do you live in US?"
             />
           </FormGroup>
@@ -65,7 +108,9 @@ const BasicDetails = () => {
             id="standard-basic"
             label="Git Profile"
             variant="standard"
-            name="git_profile"
+            name={GIT_PROFILE}
+            onChange={handleChange}
+            value={data[GIT_PROFILE]}
           />
         </Grid>
         <Grid item xs={12} md={12}>
@@ -77,7 +122,9 @@ const BasicDetails = () => {
             multiline
             maxRows={4}
             variant="standard"
-            name="about_you"
+            name={ABOUT_YOU}
+            onChange={handleChange}
+            value={data[ABOUT_YOU]}
           />
         </Grid>
       </Grid>

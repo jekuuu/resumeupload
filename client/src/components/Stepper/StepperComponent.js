@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -13,21 +14,18 @@ const steps = ["Basic Details", "Upload Documents"];
 
 export default function FormComponent() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
 
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
+  const data = useSelector((state) => state);
+
+  const handleSubmit = () => {
+    console.log(data);
   };
 
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+    if (activeStep === 1) {
+      handleSubmit();
+    }
   };
 
   const handleBack = () => {
@@ -45,9 +43,6 @@ export default function FormComponent() {
           const stepProps = {};
           const labelProps = {};
 
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
