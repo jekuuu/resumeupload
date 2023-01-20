@@ -3,6 +3,8 @@
 
 A multi-step form used to submit your CV and details to a provided endpoint.
 
+Demo
+https://github.com/jekuuu/resumeupload/blob/main/Demo.gif
 
 ## Run Locally
 
