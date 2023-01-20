@@ -1,18 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Grid } from "@mui/material";
 import { Container } from "@mui/system";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { COVER_LETTER, CV } from "../../AppConstants";
 
 const UploadDocuments = () => {
   const dispatch = useDispatch();
-
-  const data = useSelector((state) => state);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   const handleChange = (e) => {
     let { name, value } = e.target;

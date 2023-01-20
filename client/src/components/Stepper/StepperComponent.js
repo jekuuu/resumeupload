@@ -6,6 +6,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 
 import BasicDetails from "../BasicDetails/BasicDetails";
 import UploadDocuments from "../UploadDocuments/UploadDocuments";
@@ -20,7 +21,14 @@ export default function FormComponent() {
   const data = useSelector((state) => state);
 
   const handleSubmit = () => {
-    console.log(data);
+    axios
+      .post("http://localhost:5000/post", JSON.stringify(data))
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     dispatch({ type: RESET });
   };
 

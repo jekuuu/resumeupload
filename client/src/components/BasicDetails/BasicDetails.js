@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Checkbox,
   Container,
@@ -23,10 +23,6 @@ const BasicDetails = () => {
 
   const data = useSelector((state) => state);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const handleChange = (e) => {
     let { name, value } = e.target;
     dispatch({ type: name, payload: value });
@@ -43,6 +39,7 @@ const BasicDetails = () => {
         <Grid item xs={12} md={6}>
           <TextField
             required
+            type="text"
             sx={{ width: "100%" }}
             id="standard-basic"
             label="First Name"
@@ -54,6 +51,7 @@ const BasicDetails = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
+            type="text"
             sx={{ width: "100%" }}
             id="standard-basic"
             label="Last Name"
@@ -66,6 +64,7 @@ const BasicDetails = () => {
         <Grid item xs={12} md={6}>
           <TextField
             required
+            type="email"
             sx={{ width: "100%" }}
             id="standard-basic"
             label="Email"
@@ -78,6 +77,7 @@ const BasicDetails = () => {
         <Grid item xs={12} md={6}>
           <TextField
             id="standard-basic"
+            type="tel"
             label="Phone Number"
             variant="standard"
             sx={{ width: "100%" }}
@@ -104,6 +104,7 @@ const BasicDetails = () => {
         <Grid item xs={12} md={12}>
           <TextField
             required
+            type="text"
             sx={{ width: "100%" }}
             id="standard-basic"
             label="Git Profile"
@@ -115,6 +116,7 @@ const BasicDetails = () => {
         </Grid>
         <Grid item xs={12} md={12}>
           <TextField
+            type="text"
             required
             sx={{ width: "100%" }}
             label="About you"
