@@ -1,4 +1,5 @@
 import {
+  ABOUT_YOU,
   COVER_LETTER,
   CV,
   EMAIL,
@@ -19,6 +20,7 @@ const initialState = {
   git_profile: "",
   cv: "",
   cover_letter: "",
+  about_you: "",
 };
 
 export function rootReducer(state = initialState, action) {
@@ -39,6 +41,8 @@ export function rootReducer(state = initialState, action) {
       return { ...state, cv: action.payload };
     case COVER_LETTER:
       return { ...state, cover_letter: action.payload };
+    case ABOUT_YOU:
+      return { ...state, about_you: action.payload };
     case RESET:
       return { ...state, ...initialState };
 
