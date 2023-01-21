@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
@@ -51,8 +53,36 @@ export default function FormComponent() {
     setActiveStep(0);
   };
 
+  const INITIAL_FORM_STATE = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    live_in_us: false,
+    git_profile: "",
+    cv: "",
+    cover_letter: "",
+    about_you: "",
+  };
+
+  const FORM_VALIDATION = Yup.object().shape({
+    first_name: Yup.string().required("Required"),
+    last_name: Yup.string(),
+    email: Yup.string().email("Invalid email.").required("Required"),
+    phone_number: Yup.number()
+      .integer()
+      .typeError("Please enter a valid phone number"),
+    git_profile: Yup.string().required("Required"),
+    cv: Yup.string().required("Required"),
+    cover_letter: Yup.string(),
+    about_you: Yup.string().required("Required"),
+    live_in_us: Yup.boolean()
+      .oneOf([true], "Do live in US?")
+      .required("Do live in US?"),
+  });
+
   return (
-    <Box sx={{ m: "auto", width: "50%" }}>
+    <Box sx={{ m: "auto", maxWidth: "md" }}>
       {isSuccess && <SnackbarComponent isOpen />}
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
@@ -78,8 +108,20 @@ export default function FormComponent() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          {activeStep + 1 === 1 && <BasicDetails />}
-          {activeStep + 1 === 2 && <UploadDocuments />}
+          <Formik
+            initialValues={{
+              ...INITIAL_FORM_STATE,
+            }}
+            validationSchema={FORM_VALIDATION}
+            onSubmit={(values) => {
+              console.log(values);
+            }}
+          >
+            <Form>
+              {activeStep + 1 === 1 && <BasicDetails />}
+              {activeStep + 1 === 2 && <UploadDocuments />}
+            </Form>
+          </Formik>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"

@@ -3,6 +3,7 @@ import { Button, Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import { useDispatch } from "react-redux";
 
+import SubmitButton from "../Button";
 import { COVER_LETTER, CV } from "../../AppConstants";
 
 const UploadDocuments = () => {
@@ -40,6 +41,9 @@ const UploadDocuments = () => {
             />
           </Button>
         </Grid>
+        <Button color="primary" variant="contained" fullWidth type="submit">
+          Submit
+        </Button>
       </Grid>
     </Container>
   );
