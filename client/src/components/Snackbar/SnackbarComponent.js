@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert, Snackbar } from "@mui/material";
 
-const SnackbarComponent = ({ isOpen }) => {
+const SnackbarComponent = ({ isOpen, isError = false }) => {
   const [open, setOpen] = React.useState(isOpen);
 
   const handleClose = (event, reason) => {
@@ -18,9 +18,15 @@ const SnackbarComponent = ({ isOpen }) => {
       onClose={handleClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
     >
-      <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-        Profile saved successfully!
-      </Alert>
+      {isError ? (
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Something went wrong!!!
+        </Alert>
+      ) : (
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Profile saved successfully!
+        </Alert>
+      )}
     </Snackbar>
   );
 };

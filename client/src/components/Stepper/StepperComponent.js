@@ -7,18 +7,20 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { CircularProgress, Container } from "@mui/material";
 
 import BasicDetails from "../BasicDetails/BasicDetails";
 import UploadDocuments from "../UploadDocuments/UploadDocuments";
-import { RESET } from "../../AppConstants";
 import SnackbarComponent from "../Snackbar/SnackbarComponent";
+import { RESET } from "../../AppConstants";
 
 const steps = ["Basic Details", "Upload Documents"];
 
-export default function FormComponent() {
+export default function StepperComponent() {
   const [activeStep, setActiveStep] = useState(0);
   const dispatch = useDispatch();
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const data = useSelector((state) => state);
 
@@ -31,9 +33,15 @@ export default function FormComponent() {
       })
       .catch(function (error) {
         console.log(error);
+        setIsError(true);
       });
     dispatch({ type: RESET });
+    resetState();
+  };
+
+  const resetState = () => {
     setIsSuccess(false);
+    setIsError(false);
   };
 
   const handleNext = () => {
@@ -52,8 +60,9 @@ export default function FormComponent() {
   };
 
   return (
-    <Box sx={{ m: "auto", width: "50%" }}>
+    <Box sx={{ m: "auto", maxWidth: "md" }}>
       {isSuccess && <SnackbarComponent isOpen />}
+      {isError && <SnackbarComponent isOpen isError />}
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -67,15 +76,21 @@ export default function FormComponent() {
         })}
       </Stepper>
       {activeStep === steps.length ? (
-        <React.Fragment>
+        <Container maxWidth="md" sx={{ mt: 5 }}>
+          {!isSuccess && !isError && (
+            <>
+              Saving your profile... <CircularProgress />
+            </>
+          )}
           <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
+            {isSuccess && "Profile submitted successfully"}
+            {isError && "Please try again"}
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleReset}>Go To Home</Button>
           </Box>
-        </React.Fragment>
+        </Container>
       ) : (
         <React.Fragment>
           {activeStep + 1 === 1 && <BasicDetails />}

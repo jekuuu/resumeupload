@@ -5,9 +5,9 @@ import {
   FormControlLabel,
   FormGroup,
   Grid,
-  TextField,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import TextFieldWrapper from "../TextField";
 import {
   ABOUT_YOU,
   EMAIL,
@@ -37,50 +37,38 @@ const BasicDetails = () => {
     <Container maxWidth="sm" sx={{ mt: 5 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <TextField
+          <TextFieldWrapper
             required
             type="text"
-            sx={{ width: "100%" }}
-            id="standard-basic"
             label="First Name"
-            variant="standard"
             name={FIRST_NAME}
             value={data[FIRST_NAME]}
             onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
+          <TextFieldWrapper
             type="text"
-            sx={{ width: "100%" }}
-            id="standard-basic"
             label="Last Name"
-            variant="standard"
             name={LAST_NAME}
             onChange={handleChange}
             value={data[LAST_NAME]}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
+        <Grid item xs={12} md={12}>
+          <TextFieldWrapper
             required
             type="email"
-            sx={{ width: "100%" }}
-            id="standard-basic"
             label="Email"
-            variant="standard"
             name={EMAIL}
             onChange={handleChange}
             value={data[EMAIL]}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            id="standard-basic"
+        <Grid item xs={12} md={12}>
+          <TextFieldWrapper
             type="tel"
             label="Phone Number"
-            variant="standard"
-            sx={{ width: "100%" }}
             name={PHONE_NUMBER}
             onChange={handleChange}
             value={data[PHONE_NUMBER]}
@@ -91,7 +79,7 @@ const BasicDetails = () => {
             <FormControlLabel
               control={
                 <Checkbox
-                  value={data[LIVE_IN_US]}
+                  checked={data[LIVE_IN_US]}
                   name={LIVE_IN_US}
                   required
                   onChange={handleCheckbox}
@@ -102,28 +90,22 @@ const BasicDetails = () => {
           </FormGroup>
         </Grid>
         <Grid item xs={12} md={12}>
-          <TextField
+          <TextFieldWrapper
             required
             type="text"
-            sx={{ width: "100%" }}
-            id="standard-basic"
             label="Git Profile"
-            variant="standard"
             name={GIT_PROFILE}
             onChange={handleChange}
             value={data[GIT_PROFILE]}
           />
         </Grid>
         <Grid item xs={12} md={12}>
-          <TextField
+          <TextFieldWrapper
             type="text"
             required
-            sx={{ width: "100%" }}
             label="About you"
-            id="standard-multiline-static"
             multiline
             maxRows={4}
-            variant="standard"
             name={ABOUT_YOU}
             onChange={handleChange}
             value={data[ABOUT_YOU]}

@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 
-import FormComponent from "./components/Stepper/StepperComponent";
+import StepperComponent from "./components/Stepper/StepperComponent";
 import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
       <Navbar />
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <FormComponent />
+        <StepperComponent />
       </Box>
     </>
   );

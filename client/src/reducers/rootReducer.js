@@ -16,7 +16,7 @@ const initialState = {
   last_name: "",
   email: "",
   phone_number: "",
-  live_in_us: false,
+  live_in_us: true,
   git_profile: "",
   cv: "",
   cover_letter: "",
