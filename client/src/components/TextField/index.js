@@ -3,12 +3,7 @@ import { TextField } from "@mui/material";
 
 const TextFieldWrapper = ({ isRequired = false, ...rest }) => {
   return (
-    <TextField
-      sx={{ width: "100%" }}
-      id="outlined-basic"
-      variant="outlined"
-      {...rest}
-    />
+    <TextField id="outlined-basic" variant="outlined" fullWidth {...rest} />
   );
 };
 
